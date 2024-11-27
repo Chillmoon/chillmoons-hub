@@ -79,7 +79,7 @@ export default function DashProfile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setUpdateUserSuccess(null);
     if (Object.keys(formData).length === 0) {
       return;
     }
