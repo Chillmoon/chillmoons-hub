@@ -18,10 +18,12 @@ import {
   deleteUserStart,
   deleteUserSuccess,
   deleteUserFailure,
+  signoutSuccess,
 } from "../redux/user/userSlice";
 
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { handleSignout } from "../utils/handleSignout";
 
 export default function DashProfile() {
   const [imageFile, setImageFile] = useState(null);
@@ -217,7 +219,12 @@ export default function DashProfile() {
         <span className="cursor-pointer" onClick={() => setShowModal(true)}>
           Delete account
         </span>
-        <span className="cursor-pointer">Sign Out</span>
+        <span
+          onClick={() => handleSignout(dispatch)}
+          className="cursor-pointer"
+        >
+          Sign Out
+        </span>
       </div>
       {successMessage && (
         <Alert color="success" className="mt-5">
