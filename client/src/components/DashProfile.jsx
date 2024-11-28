@@ -7,6 +7,7 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
+import { Link } from "react-router-dom";
 
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
@@ -18,7 +19,6 @@ import {
   deleteUserStart,
   deleteUserSuccess,
   deleteUserFailure,
-  signoutSuccess,
 } from "../redux/user/userSlice";
 
 import { CircularProgressbar } from "react-circular-progressbar";
@@ -37,7 +37,7 @@ export default function DashProfile() {
 
   const filePickerRef = useRef();
   const dispatch = useDispatch();
-  const { currentUser, error } = useSelector((state) => state.user);
+  const { currentUser, error, loading } = useSelector((state) => state.user);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -210,10 +210,22 @@ export default function DashProfile() {
           type="submit"
           gradientDuoTone="greenToBlue"
           outline
-          disabled={isUploading}
+          disabled={isUploading || loading}
         >
-          Update
+          {isUploading || loading ? "Loading..." : "Update"}
         </Button>
+        {currentUser.isAdmin && (
+          <Link to="/create-post">
+            <Button
+              type="button"
+              gradientDuoTone="greenToBlue"
+              className="
+          w-full"
+            >
+              Create a post
+            </Button>
+          </Link>
+        )}
       </form>
       <div className="text-red-500 flex flex-row justify-between mt-5">
         <span className="cursor-pointer" onClick={() => setShowModal(true)}>
