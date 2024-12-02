@@ -15,7 +15,7 @@ const postSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    title: {
+    image: {
       type: String,
       default:
         "https://www.socialchamp.io/wp-content/uploads/2024/04/Content-Blog-Banner_Q2-2024_1125x600_015_Social-Media-Engagement-Post-Ideas.png",
