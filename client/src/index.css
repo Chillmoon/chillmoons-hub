@@ -39,3 +39,44 @@ body {
 .dark .post-content a {
   color: red;
 }
+
+.post-content pre {
+  background-color: #1e293b;
+  border: 1px solid rgb(61, 69, 83);
+  color: #e8e7e7;
+  white-space: pre-wrap;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-content ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.post-content ol {
+  list-style-type: decimal;
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.post-content ul li,
+.post-content ol li {
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+
+.post-content ul ul,
+.post-content ol ol {
+  margin-left: 1.5rem;
+}
+
+.post-content ul ul li::marker {
+  content: "•";
+}
+
+.post-content ol ol li::marker {
+  content: counters(list-item, ".") ".";
+}
