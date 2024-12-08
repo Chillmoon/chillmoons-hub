@@ -28,7 +28,6 @@ export default function DashboardComponent() {
         const commentData = await commentRes.json();
 
         if (userRes.ok && postRes.ok && commentRes.ok) {
-          s;
           setUsers(userData.users);
           setPosts(postData.posts);
           setComments(commentData.comments);
