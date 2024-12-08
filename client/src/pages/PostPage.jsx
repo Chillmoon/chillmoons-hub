@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { Alert, Button, Spinner } from "flowbite-react";
+import { Button, Spinner } from "flowbite-react";
+
 import CommentSection from "../components/CommentSection";
+import AlertMessage from "../components/AlertMessage";
 import PostCard from "../components/PostCard";
 
 export default function PostPage() {
@@ -66,7 +68,7 @@ export default function PostPage() {
   if (error) {
     return (
       <div className="flex flex-col justify-center items-center min-h-screen">
-        <Alert color="failure">{error}</Alert>
+        <AlertMessage message={error} type="failure" />
         <Link to="/">
           <Button gradientDuoTone="greenToBlue" className="mt-4">
             Go Back to Home

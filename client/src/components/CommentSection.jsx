@@ -1,9 +1,11 @@
-import { Alert, Button, Modal, TextInput, Textarea } from "flowbite-react";
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { Button, Textarea } from "flowbite-react";
 import { Link, useNavigate } from "react-router-dom";
+
+import ConfirmationModal from "./ConfirmationModal";
 import CommentComponent from "./CommentComponent";
-import { HiOutlineExclamationCircle } from "react-icons/hi";
+import AlertMessage from "./AlertMessage";
 
 export default function CommentSection({ postId }) {
   const [comment, setComment] = useState("");
@@ -158,11 +160,7 @@ export default function CommentSection({ postId }) {
             Submit
           </Button>
         </div>
-        {commentError && (
-          <Alert color="failure" className="mt-5">
-            {commentError}
-          </Alert>
-        )}
+        <AlertMessage message={commentError} type="failure" />
       </form>
       {CommentSection.length === 0 ? (
         <p className="text-sm my-5">No comments yet. You can be first!</p>
@@ -188,33 +186,12 @@ export default function CommentSection({ postId }) {
           ))}
         </>
       )}
-      <Modal
+      <ConfirmationModal
         show={showModal}
         onClose={() => setShowModal(false)}
-        popup
-        size="md"
-      >
-        <Modal.Header />
-        <Modal.Body>
-          <div className="text-center">
-            <HiOutlineExclamationCircle className="h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto" />
-            <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-400">
-              Are you sure you want to delete this comment?
-            </h3>
-            <div className="flex justify-center gap-4">
-              <Button
-                color="failure"
-                onClick={() => handleDelete(commentToDelete)}
-              >
-                Yes, I'm sure
-              </Button>
-              <Button color="gray" onClick={() => setShowModal(false)}>
-                No, cancel
-              </Button>
-            </div>
-          </div>
-        </Modal.Body>
-      </Modal>
+        onConfirm={() => handleDelete(commentToDelete)}
+        message="Are you sure you want to delete this comment?"
+      />
     </div>
   );
 }

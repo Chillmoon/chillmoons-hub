@@ -6,12 +6,13 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
-import { Alert, Button, FileInput, Select, TextInput } from "flowbite-react";
+import { Button, FileInput, Select, TextInput } from "flowbite-react";
 
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
 import { app } from "../firebase";
+import AlertMessage from "../components/AlertMessage";
 
 export default function CreatePost() {
   const [file, setFile] = useState(null);
@@ -127,7 +128,7 @@ export default function CreatePost() {
             {imageUploadProgress ? `${imageUploadProgress || 0}%` : "Upload"}
           </Button>
         </div>
-        {imageUploadError && <Alert color="failure">{imageUploadError}</Alert>}
+
         {formData.image && <img src={formData.image} alt="upload" />}
         <ReactQuill
           theme="snow"
@@ -141,11 +142,10 @@ export default function CreatePost() {
         <Button type="submit" gradientDuoTone="greenToBlue">
           Publish
         </Button>
-        {publishError && (
-          <Alert className="mt-5" color="failure">
-            {publishError}
-          </Alert>
-        )}
+        <AlertMessage
+          message={publishError || imageUploadError}
+          type="failure"
+        />
       </form>
     </div>
   );
