@@ -1,11 +1,11 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { Button, Textarea } from "flowbite-react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import ConfirmationModal from "./ConfirmationModal";
 import CommentComponent from "./CommentComponent";
-import AlertMessage from "./AlertMessage";
+import CommentForm from "./CommentForm";
+import CurrentUserInfo from "./CurrentUserInfo";
 
 export default function CommentSection({ postId }) {
   const [comment, setComment] = useState("");
@@ -114,55 +114,26 @@ export default function CommentSection({ postId }) {
       console.log(error.message);
     }
   };
+
   return (
     <div className="max-w-2xl mx-auto w-full p-3">
       {currentUser ? (
-        <div className="flex items-center gap-1 my-5 text-gray-500 text-sm">
-          <p>Signed in as:</p>
-          <img
-            className="h-5 w-5 object-cover rounded-full"
-            src={currentUser.profilePicture}
-            alt={currentUser.username}
-          />
-          <Link
-            className="text-xs text-cyan-600 hover:underline"
-            to="/dashboard?tab=profile"
-          >
-            @{currentUser.username}
-          </Link>
-        </div>
+        <CurrentUserInfo currentUser={currentUser} />
       ) : (
         <div className="text-sm text-teal-600 my-5 flex gap-1">
-          You must be loged in to comment
+          You must be logged in to comment
           <Link to="/sign-in" className="text-blue-600 hover:underline">
             Sign in
           </Link>
         </div>
       )}
-      <form
-        className="border border-teal-500 rounded-md p-3"
-        onSubmit={handleSubmit}
-      >
-        <Textarea
-          placeholder="Add a comment.."
-          rows="3"
-          maxLength={200}
-          onChange={(e) => {
-            setComment(e.target.value);
-          }}
-          value={comment}
-        />
-        <div className="flex justify-between items-center mt-5 ">
-          <p className="text-grey-500 text-sm">
-            {200 - comment.length} characters remaining
-          </p>
-          <Button outline gradientDuoTone="cyanToBlue" type="submit">
-            Submit
-          </Button>
-        </div>
-        <AlertMessage message={commentError} type="failure" />
-      </form>
-      {CommentSection.length === 0 ? (
+      <CommentForm
+        comment={comment}
+        setComment={setComment}
+        handleSubmit={handleSubmit}
+        commentError={commentError}
+      />
+      {comments.length === 0 ? (
         <p className="text-sm my-5">No comments yet. You can be first!</p>
       ) : (
         <>
