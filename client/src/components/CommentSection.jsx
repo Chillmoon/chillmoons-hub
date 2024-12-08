@@ -6,13 +6,15 @@ import CommentComponent from "./CommentComponent";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 export default function CommentSection({ postId }) {
-  const { currentUser } = useSelector((state) => state.user);
   const [comment, setComment] = useState("");
   const [commentError, setCommentError] = useState(null);
   const [comments, setComments] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [commentToDelete, setCommentToDelete] = useState(null);
+
   const navigate = useNavigate();
+  const { currentUser } = useSelector((state) => state.user);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (comment.length > 200) {
