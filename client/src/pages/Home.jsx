@@ -15,12 +15,12 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
-      <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto ">
-        <h1 className="text-3xl font-bold lg:text-6xl text-teal-600 dark:text-teal-300 ">
+    <div className="animate-fade-in">
+      <div className="flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto">
+        <h1 className="text-3xl font-bold lg:text-6xl text-teal-600 dark:text-teal-300 animate-slide-in">
           Hey there!
         </h1>
-        <p className="text-gray-500 text-xs sm:text-sm dark:text-gray-300">
+        <p className="text-gray-500 text-xs sm:text-sm dark:text-gray-300 animate-fade-in-delay">
           Welcome to my Hub ✨ I'm so glad to see you on my website! Here, you
           can get to know me better and explore my posts on programming and
           lifestyle topics. I’m excited to share my thoughts and experiences
@@ -29,16 +29,23 @@ export default function Home() {
       </div>
       <div className="max-w-6xl mx-auto p-3 flex flex-col gap-8 py-7">
         {posts && posts.length > 0 && (
-          <div className="flex flex-col gap-6 ">
-            <h2 className="text-2xl font-semibold text-center">Recent Posts</h2>
+          <div className="flex flex-col gap-6">
+            <h2 className="text-2xl font-semibold text-center animate-slide-in">
+              Recent Posts
+            </h2>
             <div className="flex flex-wrap gap-4 justify-center">
-              {posts.map((post) => (
-                <PostCard key={post._id} post={post} />
+              {posts.map((post, index) => (
+                <PostCard
+                  key={post._id}
+                  post={post}
+                  className="animate-fade-in"
+                  style={{ animationDelay: `${index * 0.2}s` }}
+                />
               ))}
             </div>
             <Link
               to={"/search"}
-              className="text-lg text-teal-500 hover:underline text-center"
+              className="text-lg text-teal-500 hover:underline text-center animate-bounce-in"
             >
               View all posts
             </Link>
