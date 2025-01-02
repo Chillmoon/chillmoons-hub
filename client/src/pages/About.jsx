@@ -69,7 +69,7 @@ export default function About() {
     <div className="flex flex-col items-center justify-center p-6 md:p-10 bg-gray-100 min-h-screen">
       <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-teal-500 mb-6 animate-fade-in">
         <img
-          src="./public/assets/photo.jpg"
+          src="https://firebasestorage.googleapis.com/v0/b/chillmoons-hub.firebasestorage.app/o/photo.jpg?alt=media&token=e88e8e4b-1a99-433f-8a91-61daf186e1ef"
           alt="Tetiana"
           className="w-full h-full object-cover"
         />
