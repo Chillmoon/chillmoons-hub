@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import ConfirmationModal from "./ConfirmationModal";
 import CommentComponent from "./CommentComponent";
@@ -126,13 +126,15 @@ export default function CommentSection({ postId }) {
             Sign in
           </Link>
         </div>
+      )}{" "}
+      {currentUser && (
+        <CommentForm
+          comment={comment}
+          setComment={setComment}
+          handleSubmit={handleSubmit}
+          commentError={commentError}
+        />
       )}
-      <CommentForm
-        comment={comment}
-        setComment={setComment}
-        handleSubmit={handleSubmit}
-        commentError={commentError}
-      />
       {comments.length === 0 ? (
         <p className="text-sm my-5">No comments yet. You can be first!</p>
       ) : (
